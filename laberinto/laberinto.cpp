@@ -472,34 +472,40 @@ void obtenerMapa(int(&pArray)[mapa.anchoMap][mapa.altoMap]) {
 void imprimeMapaJugador(int color) {
 	system("cls");
 	cout << "vida: " << jugador.getHp()<<"\n";
+	string impresion = "";
 	for (int i = 0; i < mapa.altoMap; i++) {
 		for (int j = 0; j < mapa.anchoMap; j++) {
 			if (mapa.mapArray[j][i] != 0) {
 
 				if (i == jugador.getY() && j == jugador.getX()) {
-
-					cout << "\033[" << color << "m[" << mapa.mapArray[j][i] << "]\033[0m";
+					impresion += "\033[" + to_string(color) + "m[" + to_string(mapa.mapArray[j][i]) + "]\033[0m";
+					//cout << "\033[" << color << "m[" << mapa.mapArray[j][i] << "]\033[0m";
 				}
 				else if (recogeSala(j, i)) {
-					cout << "[x]";
+					impresion += "[x]";
+					//cout << "[x]";
 				}
 
 				else if (abs(i - jugador.getY()) <= 1 && j == jugador.getX() || (abs(j - jugador.getX()) <= 1 && i == jugador.getY())) {
-					cout << "[ ]";
+					impresion += "[ ]";
+					//cout << "[ ]";
 				}
 				else {
-					cout << "   ";
+					impresion += "   ";
+					//cout << "   ";
 				}
 
 
 			}
 			else {
-				cout << "   ";
+				impresion += "   ";
+				//cout << "   ";
 			}
 
 		}
-		cout << '\n';
-	}
+		impresion += "\n";
+		//cout << '\n';
+	}cout << impresion;
 }
 
 void derrota() {
